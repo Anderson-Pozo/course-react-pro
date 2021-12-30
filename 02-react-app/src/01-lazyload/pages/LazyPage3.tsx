@@ -1,6 +1,6 @@
 const LazyPage3 = () => {
     return (
-        <h1>PazyPage3</h1>
+        <h1>Lazy Page3</h1>
     )
 }
 
