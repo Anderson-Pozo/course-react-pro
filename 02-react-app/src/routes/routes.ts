@@ -26,4 +26,4 @@ export const routes: Route[] = [
         Component: NoLazyLoad,
         name: 'No Lazy Load'
     }
-] 
+]
