@@ -1,4 +1,4 @@
-import { ProductCard } from "02-component-patterns/components/ProductCard"
+import { ProductCard } from "02-component-patterns/components"
 
 export const ShoppingPage = () => {
 
@@ -20,7 +20,8 @@ export const ShoppingPage = () => {
                     <ProductCard.Title title="Vanilla coffee"/>
                     <ProductCard.Buttons/>
                 </ProductCard>
-                {/* Another way to structure component */}
+
+                {/* Second way to structure component */}
 
                 {/* <ProductCard product={product}>
                     <ProductImage/>
