@@ -1,10 +1,14 @@
-import { ProductCard } from "02-component-patterns/components"
+import { ProductCard, ProductImage, ProductTitle, ProductButtons } from "02-component-patterns/components"
+
+import coffee_mug from '../assets/coffee-mug.png';
+import '../styles/custom-styles.css';
 
 export const ShoppingPage = () => {
 
     const product = {
         id: '1',
         title: 'Coffee Mug',
+        image: coffee_mug
     }
 
     return (
@@ -23,13 +27,11 @@ export const ShoppingPage = () => {
 
                 {/* Second way to structure component */}
 
-                {/* <ProductCard product={product}>
-                    <ProductImage/>
-                    <ProductTitle title="Hola"/>
-                    <ProductButtons counter={0} increseBy={function (value: number): void {
-                        throw new Error("Function not implemented.")
-                    } }/>
-                </ProductCard> */}
+                <ProductCard product={product} className="bg-dark">
+                    <ProductImage className="custom-image"/>
+                    <ProductTitle title="Coffee snack" className="text-white text-bold"/>
+                    <ProductButtons/>
+                </ProductCard>
             </div>
         </div>
     )
