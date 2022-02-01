@@ -1,13 +1,25 @@
 import { ProductCard, ProductImage, ProductTitle, ProductButtons } from "02-component-patterns/components"
+import { Product } from "02-component-patterns/interfaces/interfaces";
+import { useState } from "react";
 
 import '../styles/custom-styles.css';
 
+const products: Product[] = [
+    { id: '1', title: 'Coffee Mug', image: './coffee-mug.png', },
+    { id: '2', title: 'Coffee Mug-Meme', image: './coffee-mug2.png' }
+]
+
+interface ProductInCart extends Product {
+    count: number
+}
+
 export const ShoppingPage = () => {
 
-    const products = [
-        { id: '1', title: 'Coffee Mug', image: './coffee-mug.png'},
-        { id: '2', title: 'Coffee Mug-Meme', image: './coffee-mug2.png'}
-    ]
+    const [shoppingCart, setShoppingCart] = useState<{[key:string]: ProductInCart}>({});
+
+    const onProductCardChange = ({ count, product }: { count: number, product: Product }) => {
+        // console.log('Change', { count, product });
+    }
 
     return (
         <div>
@@ -17,20 +29,47 @@ export const ShoppingPage = () => {
                 flexDirection: 'row',
                 flexWrap: 'wrap'
             }}>
-                <ProductCard product={products[0]} className="bg-dark text-white">
-                    <ProductCard.Image className="custom-image"/>
-                    <ProductCard.Title title="Vanilla coffee" className="text-bold"/>
-                    <ProductCard.Buttons className="custom-buttons"/>
-                </ProductCard>
-
-                {/* Second way to structure component */}
-                <ProductCard product={products[1]} className="bg-dark text-white">
-                    <ProductImage 
+                {
+                    products.map(product => (
+                        <ProductCard 
+                            product={product} 
+                            className="bg-dark text-white" 
+                            key={product.id}
+                            onChange={ onProductCardChange }
+                        >
+                            <ProductImage
+                                className="custom-image"
+                                style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
+                            />
+                            <ProductTitle className="text-bold" />
+                            <ProductButtons className="custom-buttons" />
+                        </ProductCard>
+                    ))
+                }
+            </div>
+            <div className="shopping-cart">
+                <ProductCard 
+                    product={products[0]} 
+                    className="bg-dark text-white"
+                    style={{ width: '100px' }}
+                >
+                    <ProductImage
                         className="custom-image"
                         style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
                     />
-                    <ProductTitle className="text-bold"/>
-                    <ProductButtons className="custom-buttons"/>
+                    <ProductButtons className="custom-buttons" />
+                </ProductCard>
+                <ProductCard 
+                    product={products[1]} 
+                    className="bg-dark text-white"
+                    style={{ width: '100px' }}
+                    // onChange={ () => onProductCardChange() }
+                >
+                    <ProductImage
+                        className="custom-image"
+                        style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
+                    />
+                    <ProductButtons className="custom-buttons" />
                 </ProductCard>
             </div>
         </div>
