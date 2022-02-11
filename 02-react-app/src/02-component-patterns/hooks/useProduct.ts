@@ -1,4 +1,4 @@
-import { onChangeArgs, Product } from "02-component-patterns/interfaces/interfaces";
+import { InitialValues, onChangeArgs, Product } from "02-component-patterns/interfaces/interfaces";
 import { useEffect, useRef, useState } from "react";
 
 type typeUseProduct = {
@@ -10,30 +10,35 @@ interface useProductArgs {
     product: Product;
     onChange?: (args: onChangeArgs) => void;
     value?: number;
+    initialValues?: InitialValues
 }
 
 
-const useProduct = ({ onChange, product, value = 0 }: useProductArgs): typeUseProduct => {
-    const [counter, setCounter] = useState(value);
+const useProduct = ({ onChange, product, value = 0, initialValues }: useProductArgs): typeUseProduct => {
+    
+    const [counter, setCounter] = useState<number>(initialValues?.count || value );
+    const isMounted = useRef(false);
 
-    const isControlled = useRef(!!onChange);
+    console.log(initialValues?.count);
 
     const increseBy = (value: number) => {
-
-        if (isControlled.current) {
-            return onChange!({count: value, product})
+        let newValue = Math.max(counter + value, 0);
+        if (initialValues?.maxCount) {
+            newValue = Math.min(newValue, initialValues.maxCount) 
         }
-        
-        const newValue = Math.max(counter + value, 0)
         setCounter(newValue);
         onChange && onChange({ count: newValue, product });
     };
 
     useEffect(() => {
+        if (!isMounted.current) return; 
         setCounter(value)
     }, [value]);
 
-
+    useEffect(() => {
+        isMounted.current = true;
+    }, [])
+    
     return {
         counter,
         increseBy
