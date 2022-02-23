@@ -9,7 +9,8 @@ const { Provider } = ProductContext;
 
 export interface Props {
     product: Product;
-    children?: React.ReactElement | React.ReactElement[];
+    // children?: React.ReactElement | React.ReactElement[];
+    children: () => JSX.Element;
     className?: string;
     style?: React.CSSProperties;
     onChange?: (arg: onChangeArgs) => void;
@@ -19,19 +20,20 @@ export interface Props {
 
 export const ProductCard = ({ product, children, className, style, onChange, value, initialValues }: Props) => {
 
-    const { counter, increseBy } = useProduct({ onChange, product, value, initialValues });
+    const { counter, increseBy, maxCount } = useProduct({ onChange, product, value, initialValues });
 
     return (
         <Provider value={{
             product,
             counter,
-            increseBy
+            increseBy,
+            maxCount
         }}>
             <div 
                 className={` ${styles.productCard} ${className}`}
                 style={style}
             >
-                { children }
+                { children() }
             </div>
         </Provider>
     )

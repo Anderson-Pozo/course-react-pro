@@ -3,7 +3,8 @@ import { useEffect, useRef, useState } from "react";
 
 type typeUseProduct = {
     counter: number;
-    increseBy: (value: number) => void
+    increseBy: (value: number) => void,
+    maxCount?: number
 }
 
 interface useProductArgs {
@@ -18,8 +19,6 @@ const useProduct = ({ onChange, product, value = 0, initialValues }: useProductA
     
     const [counter, setCounter] = useState<number>(initialValues?.count || value );
     const isMounted = useRef(false);
-
-    console.log(initialValues?.count);
 
     const increseBy = (value: number) => {
         let newValue = Math.max(counter + value, 0);
@@ -41,7 +40,8 @@ const useProduct = ({ onChange, product, value = 0, initialValues }: useProductA
     
     return {
         counter,
-        increseBy
+        increseBy,
+        maxCount: initialValues?.maxCount
     };
 }
 

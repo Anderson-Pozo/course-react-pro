@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ProductCard, ProductImage, ProductTitle, ProductButtons } from "02-component-patterns/components"
 import { products } from "02-component-patterns/data/products";
 
@@ -17,15 +18,21 @@ export const ShoppingPage = () => {
                     key={product.id}
                     initialValues={{
                         count: 4,
-                        maxCount: 10
+                        maxCount: 15
                     }}
                 >
-                    <ProductImage
-                        className="custom-image"
-                        style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
-                    />
-                    <ProductTitle className="text-bold" />
-                    <ProductButtons className="custom-buttons" />
+                    {
+                        () => (
+                            <Fragment>
+                                <ProductImage
+                                    className="custom-image"
+                                    style={{ boxShadow: '10px 10px 10px rgba(0,0,0,0.2)' }}
+                                />
+                                <ProductTitle className="text-bold" />
+                                <ProductButtons className="custom-buttons"/>
+                            </Fragment>
+                        )
+                    }
                 </ProductCard>
             </div>
         </div>
