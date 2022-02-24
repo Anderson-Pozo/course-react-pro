@@ -22,7 +22,7 @@ export const ShoppingPage = () => {
                     }}
                 >
                     {
-                        () => (
+                        ({ reset, count, increseBy, isMaxCountReached }) => (
                             <Fragment>
                                 <ProductImage
                                     className="custom-image"
@@ -30,6 +30,13 @@ export const ShoppingPage = () => {
                                 />
                                 <ProductTitle className="text-bold" />
                                 <ProductButtons className="custom-buttons"/>
+                                <button onClick={reset}>Reset</button>
+                                <button onClick={ ()=> increseBy(-2) }>-2</button>
+                                <span style={{ padding: '8px' }}>{ count }</span>
+                                {
+                                    (!isMaxCountReached) &&
+                                    <button onClick={()=> increseBy(2)}>+2</button>
+                                }
                             </Fragment>
                         )
                     }
