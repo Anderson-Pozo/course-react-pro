@@ -18,6 +18,7 @@
     "baseUrl": "./src",
     "paths": {
       "@01-lazyload/*": ["01-lazyload/*"],
+      "@forms/*": ["03-forms/*"],
     }
   },
   "include": ["./src"]
