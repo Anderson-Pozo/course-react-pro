@@ -1,11 +1,14 @@
-import { PlacesProvider } from './context';
+import { MapProvider, PlacesProvider } from './context';
+import { HomePage } from './pages/HomePage';
 import './index.css';
 
 function App() {
 
   return (
     <PlacesProvider>
-      <h1>Hello world from provider</h1>
+      <MapProvider>
+        <HomePage />
+      </MapProvider>
     </PlacesProvider>
   )
 }
